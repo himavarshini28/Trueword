@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import authRoutes from './routes/auth.js';
-
+import testimonialRoutes from './routes/testimonials.js';
 dotenv.config();
 connectDB();
 
@@ -10,6 +10,7 @@ const app=express();
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/testimonials', testimonialRoutes);
 
 app.get('/',(req,res)=>
 {
