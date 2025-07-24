@@ -1,14 +1,14 @@
-export const validateRequest = (schema) => {
+export const validateRequest = (schema) => 
   {
     return async (req, res, next) => {
       try {
-        const validateData = schema.parseAsync(req.body);
+        const validateData = await schema.parseAsync(req.body);
 
         req.body = validateData;
-        console.log("Validation passed:", validatedData);
+        console.log("Validation passed:", validateData);
         next();
       } catch (error) {
-        if ((error.name = "ZodError")) {
+        if ((error.name === "ZodError")) {
           const errorMessages = error.errors.map((err) => ({
             field: err.path.join("."),
             message: err.message,
@@ -30,4 +30,4 @@ export const validateRequest = (schema) => {
       }
     };
   }
-};
+

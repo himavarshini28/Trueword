@@ -1,5 +1,5 @@
-import { validateRequest } from "../middleware/validation";
-import { registerSchema,loginSchema } from "../validators/userValidation";
+import { validateRequest } from "../middleware/validation.js";
+import { registerSchema,loginSchema } from "../validators/userValidation.js";
 import express from 'express';
 import User from "../models/User.js";
 import jwt from 'jsonwebtoken';
