@@ -5,7 +5,7 @@ import { createTestimonialSchema,updateStatusSchema } from "../validators/testim
 import { authMiddleware } from "../middleware/auth.js";
 
 const router=express.Router();
-
+//creating a testmonial
 router.post('/',authMiddleware,validateRequest(createTestimonialSchema),async(req,res)=>{
     try{
         const {userId} = req.query;
@@ -52,7 +52,7 @@ router.post('/',authMiddleware,validateRequest(createTestimonialSchema),async(re
 });
 
 
-
+//getting a user testmonials
 router.get('/user/:userId',authMiddleware,async(req,res)=>{
     try{
         const {userId}=req.params;
@@ -80,6 +80,7 @@ router.get('/user/:userId',authMiddleware,async(req,res)=>{
     }
 });
 
+//getting approved testmonials of others
 
 router.get('/public/:userId',authMiddleware, async (req, res) => {
   try {
