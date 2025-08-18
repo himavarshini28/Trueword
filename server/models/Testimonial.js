@@ -49,6 +49,10 @@ const testimonialSchema= mongoose.Schema({
     type:String,
     minLength:2,
     maxLength:50,
+  },
+  createdAt:
+  {
+    type:Date,
   }
 
 },
