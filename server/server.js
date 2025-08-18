@@ -10,7 +10,7 @@ const app=express();
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/testimonials', testimonialRoutes);
+app.use('/testimonials', testimonialRoutes);
 
 app.get('/',(req,res)=>
 {

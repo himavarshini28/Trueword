@@ -1,30 +1,29 @@
 import {z} from 'zod';
 
 export const createTestimonialSchema=z.object({
-    customerName:z 
+    name:z 
     .string({
         required_error:"Customer name is required"
     })
     .min(2,"Name must be atleast 2 characters")  
     .max(100,"Name cannot exceed 100 characters") 
     .trim(), 
-    customerEmail:z
+    email:z
     .string({
         required_error:"Customer email is required"
     })
     .email("Please provide a valid email address")  
     .toLowerCase(),
 
-    customerCompany: z.
-    string({
-        required_error:"Customer email is required"
-    })
-    .email("Please provide a valid email address")  
-    .toLowerCase(),
 
-    customerCompany:z 
+    company:z 
     .string()
     .max(100,"Company name cannot exceed 100 characters") 
+    .trim()
+    .optional(),
+     title:z 
+    .string()
+    .max(100,"Title name cannot exceed 100 characters") 
     .trim()
     .optional(),
 

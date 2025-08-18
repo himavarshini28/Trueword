@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { maxLength, minLength } from 'zod';
 
 const testimonialSchema= mongoose.Schema({
     userId:{
@@ -8,28 +9,6 @@ const testimonialSchema= mongoose.Schema({
         index:true,
     },
 
-    customerName:{
-        type:String,
-        required:[true,"Customer name is required"],
-        trim:true,
-        minLength: [2, 'Name must be at least 2 characters'],
-    maxLength: [100, 'Name cannot exceed 100 characters']
-    },
-     customerEmail: {
-    type: String,
-    required: [true, 'Customer email is required'],
-    trim: true,
-    lowercase: true,
-    match: [
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-      'Please provide a valid email'
-    ]
-  },
-   customerCompany: {
-    type: String,
-    trim: true,
-    maxLength: [100, 'Company name cannot exceed 100 characters']
-  },
     message: {
     type: String,
     required: [true, 'Testimonial message is required'],
@@ -58,7 +37,20 @@ const testimonialSchema= mongoose.Schema({
   featured: {
     type: Boolean,
     default: false
+  },
+  creatorId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    required:true,
+    index:true,
+  },
+  userTitle:
+  {
+    type:String,
+    minLength:2,
+    maxLength:50,
   }
+
 },
 {
   timestamps: true
@@ -67,5 +59,6 @@ const testimonialSchema= mongoose.Schema({
 
 testimonialSchema.index({userId:1,status:1});
 testimonialSchema.index({userId:1,featured:1});
+
 
 export default mongoose.model('Testmonial',testimonialSchema);

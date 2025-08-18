@@ -13,8 +13,8 @@ const generateToken = (id)=>{
 router.post('/register',validateRequest(registerSchema),
 async(req,res)=>{
     try{
-        const {name,email,password,plan}=req.body;
-         console.log('Creating user with validated data:', { name, email, plan });
+        const {username,email,password,title,company,plan}=req.body;
+         console.log('Creating user with validated data:', { username, email, plan });
          const existingUser=await User.findOne({email});
          if(existingUser)
          {
@@ -23,7 +23,7 @@ async(req,res)=>{
                 message:"User already exists with this email"
             });
          }
-         const user=await User.create({name,email,password,plan});
+         const user=await User.create({username,email,password,plan});
 
          const token=generateToken(user._id);
 

@@ -1,14 +1,16 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const UserSchema = new mongoose.Schema(
     {
-        name:{
+        username:{
             type:String,
+            unique:true,
             required:[true,'Please provide a name'],
             trim:true,
-            minLength:[2,'Name must me more than two characters'],
-            maxLength:[50,'Name cannot be more than 20 characters']
+            minLength:[2,'Username must me more than two characters'],
+            maxLength:[50,'Username cannot be more than 20 characters']
         },
         email:{
             type:String,
@@ -27,6 +29,16 @@ const UserSchema = new mongoose.Schema(
             trim:true,
             select:false,
             minLength:[6,'Password must be at least 6 characters'],
+        },
+        title:{
+            type:String,
+            minLength:2,
+            maxLength:60
+        },
+        company:{
+            type:String,
+            minLength:2,
+            maxLength:60
         },
         plan:
         {
@@ -55,6 +67,14 @@ UserSchema.pre('save',async function(next){
 
 UserSchema.methods.matchPassword=async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
+};
+
+UserSchema.methods.genjwt= async function()
+{
+    return jwt.sign(
+        {id:this._id},
+        process.env.JWT_SECRET
+    );
 };
 
 export default mongoose.model('User',UserSchema);

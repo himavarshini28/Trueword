@@ -1,11 +1,12 @@
 import express from "express";
-import { validateRequest } from "../middleware/validation";
-import Testimonial from "../models/Testimonial";
-import { createTestimonialSchema,updateStatusSchema } from "../validators/testimonialValidation";
+import { validateRequest } from "../middleware/validation.js";
+import Testimonial from "../models/Testimonial.js";
+import { createTestimonialSchema,updateStatusSchema } from "../validators/testimonialValidation.js";
+import { authMiddleware } from "../middleware/auth.js";
 
-const router=router();
+const router=express.Router();
 
-router.post('/',validateRequest(createTestimonialSchema),async(req,res,next)=>{
+router.post('/',authMiddleware,validateRequest(createTestimonialSchema),async(req,res)=>{
     try{
         const {userId} = req.query;
          if (!userId) {
@@ -50,7 +51,9 @@ router.post('/',validateRequest(createTestimonialSchema),async(req,res,next)=>{
     }
 });
 
-router.get('/user/:userId',async(req,res)=>{
+
+
+router.get('/user/:userId',authMiddleware,async(req,res)=>{
     try{
         const {userId}=req.params;
         const {status,featured}=req.query;
@@ -77,7 +80,8 @@ router.get('/user/:userId',async(req,res)=>{
     }
 });
 
-router.get('/public/:userId', async (req, res) => {
+
+router.get('/public/:userId',authMiddleware, async (req, res) => {
   try {
     const { userId } = req.params;
     
@@ -104,7 +108,7 @@ router.get('/public/:userId', async (req, res) => {
   }
 });
 
-router.put('/:id/status', validateRequest(updateStatusSchema), async (req, res) => {
+router.put('/:id/status',authMiddleware, validateRequest(updateStatusSchema), async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
