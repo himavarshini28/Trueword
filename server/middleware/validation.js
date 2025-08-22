@@ -2,9 +2,9 @@ export const validateRequest = (schema) =>
   {
     return async (req, res, next) => {
       try {
-        const validateData = await schema.parseAsync(req.body);
+        const validateData = await schema.safeParse(req.body);
 
-        req.body = validateData;
+        req.body = validateData.data;
         console.log("Validation passed:", validateData);
         next();
       } catch (error) {

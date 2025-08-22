@@ -13,7 +13,8 @@ export const registerSchema= z.object(
             (val)=> val.length>0,
             "Name cannot be empty"
         ),
-         email: z
+
+        email: z
     .string({
       required_error: "Email is required"
     })
@@ -42,14 +43,12 @@ export const registerSchema= z.object(
       (val) => /\d/.test(val),
       "Password must contain at least one number"
     ),
-    plan:z.enum(["free","pro","enterprise"])
-    .optional()
-    .default("free"),
     company: z.string()
-    .min(8)
     .max(50)
     .optional(),
-    title:z.string().optional(),
+   
+    
+    
 
     }
 );

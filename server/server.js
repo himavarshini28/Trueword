@@ -3,13 +3,15 @@ import dotenv from 'dotenv';
 import connectDB from './config/database.js';
 import authRoutes from './routes/auth.js';
 import testimonialRoutes from './routes/testimonials.js';
+import cors from 'cors';
 dotenv.config();
 connectDB();
 
 const app=express();
+app.use(cors());
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth/', authRoutes);
 app.use('/testimonials', testimonialRoutes);
 
 app.get('/',(req,res)=>

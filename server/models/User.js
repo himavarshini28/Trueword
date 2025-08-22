@@ -33,12 +33,14 @@ const UserSchema = new mongoose.Schema(
         title:{
             type:String,
             minLength:2,
-            maxLength:60
+            maxLength:60,
+            default: 'developer',
         },
         company:{
             type:String,
             minLength:2,
-            maxLength:60
+            maxLength:60,
+            default:'Trueword',
         },
         plan:
         {
