@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
 import { useState } from 'react';
+import { useAuthStore } from '@/store/authstore';
 
 const navLinks = [
 	{ name: 'Home', href: '/' },
@@ -10,7 +11,8 @@ const navLinks = [
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
-
+	const token = useAuthStore(state=>state.token);
+	const logout = useAuthStore(state=>state.logout);
 	return (
 		<nav
 			className='fixed top-0 left-0 w-full bg-black shadow z-50 animate-navbar-float shadow-[0_4px_6px_rgba(255,255,255,0.1)]'
@@ -30,16 +32,26 @@ const Navbar = () => {
 							{link.name}
 						</a>
 					))}
+					{!token &&
 					<a href='/login'>
 						<Button variant='outline' className='!bg-transparent !border !border-white !text-white hover:!bg-white hover:!text-black transition'>
 							Login
 						</Button>
 					</a>
+					}
+					{!token &&
 					<a href='/signup'>
 						<Button className='!bg-transparent !border !border-white !text-white hover:!bg-white hover:!text-black transition'>
 							Sign Up
 						</Button>
 					</a>
+					}
+					{token &&
+					<a>
+						<Button className='!bg-transparent !border !border-white !text-white hover:!bg-white hover:!text-black transition'
+						onClick={()=>{logout()}}
+						>log out</Button>
+					</a>}
 				</div>
 				<div className='md:hidden'>
 					<Sheet open={open} onOpenChange={setOpen}>
@@ -60,6 +72,7 @@ const Navbar = () => {
 										{link.name}
 									</a>
 								))}
+
 								<a href='/login'>
 									<Button variant='ghost' className='bg-transparent border border-white text-white hover:bg-white hover:text-black transition '>
 										Login

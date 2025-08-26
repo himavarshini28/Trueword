@@ -73,7 +73,7 @@ router.post('/login',validateRequest(loginSchema),async(req,res)=>{
         const {email,password}=req.body;
          console.log('Login attempt for:', email);
          const user= await User.findOne({email}).select('+password');
-         if(!user || !user.matchPassword(password))
+         if(!user )
          {
             return res.status(401).json(
                 {
@@ -82,16 +82,27 @@ router.post('/login',validateRequest(loginSchema),async(req,res)=>{
                 }
             );
          }
+          const isPasswordMatch = await user.matchPassword(password);
+          console.log(password);
+        
+        if (!isPasswordMatch) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid email or Password'
+            });
+        }
+
 
          const token= generateToken(user._id);
 
          console.log('Login successful for:', email);
-
+         const userObj= user.toObject();
+         delete userObj.password;
          res.json({
       success: true,
       message: 'Login successful',
       token,
-      user
+      user:userObj
          });
 
     }

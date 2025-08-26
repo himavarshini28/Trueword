@@ -37,8 +37,7 @@ const UserSchema = new mongoose.Schema(
             default: 'developer',
         },
         company:{
-            type:String,
-            minLength:2,
+            type:String,    
             maxLength:60,
             default:'Trueword',
         },

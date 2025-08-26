@@ -5,6 +5,7 @@ import { BrowserRouter,Route ,Routes} from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
+import Create from './pages/create'
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
     <Route path="/signup" element={<SignupPage/>}/>
     <Route path="/" element={<Home/>}/>
     <Route element={<ProtectedRoute/>}>
- <Route path="/dashboard" element={<Dashboard />} />
+ <Route path="/dashboard" element={<Dashboard />} >
+ </Route>
+ <Route path="/create" element ={<Create/>}/>
     </Route>
     </Routes>
     </BrowserRouter>

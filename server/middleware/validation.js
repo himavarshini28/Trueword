@@ -2,6 +2,7 @@ export const validateRequest = (schema) =>
   {
     return async (req, res, next) => {
       try {
+        
         const validateData = await schema.safeParse(req.body);
 
         req.body = validateData.data;
