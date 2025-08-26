@@ -13,15 +13,16 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='fixed top-0 left-0 w-full bg-black shadow z-50 animate-navbar-float'
+			className='fixed top-0 left-0 w-full bg-black shadow z-50 animate-navbar-float shadow-[0_4px_6px_rgba(255,255,255,0.1)]'
 		>
 			<div className='max-w-7xl mx-auto flex items-center justify-between px-6 py-4'>
-				<span className='text-3xl font-extrabold text-white tracking-tight animate-slide-down'>
+				<span className='text-3xl font-extrabold tracking-tight animate-slide-down text-stroke text-black italic'>
 					TrueWord
 				</span>
 				<div className='hidden md:flex gap-8 items-center'>
 					{navLinks.map(link => (
 						<a
+						
 							key={link.name}
 							href={link.href}
 							className='text-white hover:text-gray-300 font-medium transition-colors duration-200'
