@@ -10,7 +10,7 @@ connectDB();
 const app=express();
 app.use(cors({
   origin: [
-    'https://trueword-e4vi.vercel.app/api',
+    'https://trueword-e4vi.vercel.app',
     'https://trueword-e4vi-blat34spz-himavarshinis-projects.vercel.app', 
     'http://localhost:5173' 
   ],
