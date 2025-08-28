@@ -5,7 +5,7 @@ import { BrowserRouter,Route ,Routes} from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
-import Create from './pages/create'
+import Create from './pages/Create'
 
 const App = () => {
   return (
