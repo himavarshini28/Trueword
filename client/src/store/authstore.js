@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/';
+
 export const useAuthStore = create ((set)=>(
     {
     
@@ -12,7 +14,7 @@ export const useAuthStore = create ((set)=>(
         login: async (email ,password)=>{
             set({loading:true, error:null});
             try{
-                const res = await axios.post('http://localhost:5000/api/auth/login',{email,password});
+                const res = await axios.post(`${API_URL}/auth/login`,{email,password});
                 set({user: res.data.user, token : res.data.token, loading:false});
                 localStorage.setItem('token', res.data.token);
                 return true;
@@ -30,7 +32,7 @@ export const useAuthStore = create ((set)=>(
         {
             set({loading:true, error: null});
             try{
-                const res= await axios.post('http://localhost:5000/api/auth/register', {username, email, password, company});
+                const res= await axios.post(`${API_URL}/auth/register`, {username, email, password, company});
 
                 set({user:res.data.user, token: res.data.token, loading:false});
 
