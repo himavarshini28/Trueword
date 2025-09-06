@@ -10,18 +10,7 @@ connectDB();
 
 const app = express();
 
-// CORS configuration with all allowed origins
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://trueword-e4vi.vercel.app',
-    'https://trueword-e4vi-45p4prl2k-himavarshinis-projects.vercel.app',
-    'https://trueword-e4vi-blat34spz-himavarshinis-projects.vercel.app'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 app.use(express.json());
 
